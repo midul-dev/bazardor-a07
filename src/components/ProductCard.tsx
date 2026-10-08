@@ -3,6 +3,27 @@ import { IProducts } from "@/types/productsType";
 import React from "react";
 
 const ProductCard = ({product} : {product:IProducts}) => {
+  const isPriceUp = product.change.dir === "up";
+  const isPriceFlat = product.change.dir === "flat";
+  const priceChangeIcon = isPriceUp ? "▲" : isPriceFlat ? "-" : "▼";
+  const priceChangeClass = isPriceUp
+    ? "bg-red-50 rounded-xl p-1 text-red-500 group-hover:bg-red-100"
+    : isPriceFlat
+    ? "bg-base-200 rounded-xl p-1 text-black-500 group-hover:bg-black-100"
+    : "bg-green- rounded-xl p-1 text-green-500 group-hover:bg-green-100";
+
+  const getUnit = (unit: string) => {
+
+    const units: Record<string, string> = {
+      kg: "কেজি",
+      litre: "লিটার",
+      piece: "পিস",
+      dozen: "ডজন",
+    };
+
+    return units[unit] || unit;
+  };
+
   return (
     <div
       className="
@@ -74,7 +95,7 @@ const ProductCard = ({product} : {product:IProducts}) => {
           </h2>
 
           <p className="text-sm text-gray-500">
-            প্রতি কেজি
+            প্রতি {getUnit(product.unit)}
           </p>
         </div>
       </div>
@@ -110,23 +131,9 @@ const ProductCard = ({product} : {product:IProducts}) => {
 
         {/* Change Badge */}
         <div
-          className="
-            rounded-full
-            bg-red-50
-            px-3
-            py-1.5
-            text-sm
-            font-semibold
-            text-red-500
-
-            transition-all
-            duration-300
-
-            group-hover:scale-105
-            group-hover:bg-red-100
-          "
+          className={priceChangeClass}
         >
-          ▲ {formatNumber(Math.abs(product.change.pct)) } %
+          {priceChangeIcon} {formatNumber(Math.abs(product.change.pct)) } %
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ const MarqueeScroll = async () => {
   const getUnit = (unit: string) => {
     const units: Record<string, string> = {
       kg: "কেজি",
-      liter: "লিটার",
+      litre: "লিটার",
       piece: "পিস",
       dozen: "ডজন",
     };
