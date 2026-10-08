@@ -7,7 +7,7 @@ const AllProducts =async () => {
     const products: IProducts[] = await getProducts()
     return (
         
-        <div className='px-6 pt-6'>
+        <div id='allProducts' className='px-6 pt-6 scroll-mt-24'>
             <div className='grid gap-2 items-center py-4'>
                     <h1 className='text-2xl font-bold'>
                         সব পণ্য</h1>

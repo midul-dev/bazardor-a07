@@ -40,11 +40,11 @@ const Hero = () => {
               {/* CTA */}
               <div className="mt-7">
                 <Link
-                  href="#সব-পণ্য"
+                  href="#allProducts"
                   className="inline-flex items-center justify-center rounded-lg bg-green-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700 hover:shadow-md active:scale-95"
                 >
                   সব পণ্য দেখুন
-                  <span className="ml-2 text-lg">↓</span>
+                  {" ↓"}
                 </Link>
               </div>
             </div>
