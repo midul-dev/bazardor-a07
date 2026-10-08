@@ -9,8 +9,8 @@ const Header = () => {
   });
 
   return (
-    <header className="w-full px-4 pt-4 sm:px-6 sm:pt-5 lg:px-8">
-      <div className="mx-auto w-full max-w-7xl">
+    <header className="w-full pt-4 sm:pt-5 ">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
 
         {/* ================= Top Header ================= */}
         <div className="flex items-center justify-between gap-3">

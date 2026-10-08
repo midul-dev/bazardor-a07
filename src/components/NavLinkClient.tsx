@@ -13,7 +13,7 @@ const NavLinkClient = ({
 
   return (
     <nav className="w-full border-y mt-2 border-slate-200 sm:mt-3 bg-white">
-      <div className="mx-auto w-full max-w-7xl px-3 sm:px-6">
+      <div className="">
         <div
           className="
             flex
