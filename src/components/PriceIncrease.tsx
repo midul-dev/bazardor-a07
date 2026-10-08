@@ -10,7 +10,7 @@ const PriceIncrease = async () => {
     .sort((a, b) => b.change.pct - a.change.pct);
 
   return (
-    <section className="w-full px-4 pt-8 sm:px-6 sm:pt-6 lg:px-8">
+    <section className="w-full px-4 pt-8 sm:px-6 sm:pt-8">
       <div className="mx-auto w-full max-w-7xl">
 
         {/* Heading */}

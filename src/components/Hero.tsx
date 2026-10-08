@@ -8,7 +8,7 @@ const Hero = () => {
   });
 
   return (
-    <section className="w-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+    <section className="w-full px-4 py-4 sm:px-6 sm:py-6">
       <div className="mx-auto w-full max-w-7xl">
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm sm:rounded-3xl">
           
@@ -38,7 +38,7 @@ const Hero = () => {
               </p>
 
               {/* CTA */}
-              <div className="mt-6 sm:mt-7">
+              <div className="flex justify-center sm:justify-start mt-6 sm:mt-7">
                 <Link
                   href="#allProducts"
                   className="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-green-700 hover:shadow-md active:scale-95 sm:px-6 sm:py-3"

@@ -9,7 +9,7 @@ const AllProducts = async () => {
   return (
     <section
       id="allProducts"
-      className="w-full scroll-mt-24 px-4 pt-8 sm:px-6 sm:pt-6 lg:px-8"
+      className="w-full scroll-mt-24 px-4 pt-8 sm:px-6 sm:pt-8 lg:px-8"
     >
       <div className="mx-auto w-full max-w-7xl">
 

@@ -25,7 +25,7 @@ const MarqueeScroll = async () => {
         gradient
         gradientColor="#f0fdf4"
         gradientWidth={60}
-        className="py-2.5 sm:py-3"
+        className="py-1.5"
       >
         {products.map((product) => {
           const isUp = product.change.dir === "up";
@@ -37,9 +37,7 @@ const MarqueeScroll = async () => {
               className="
                 flex shrink-0 items-center gap-2
                 px-3
-                sm:gap-3 sm:px-5
-                md:px-6
-                lg:px-7
+                sm:gap-1 sm:px-5
               "
             >
               {/* Product */}
