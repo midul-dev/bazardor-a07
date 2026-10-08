@@ -6,7 +6,7 @@ const Header = () => {
     const date = new Date().toLocaleDateString('bn-BD', {dateStyle: 'full'})
     return (
         
-        <div className='max-w-7xl mx-auto px-4 py-5 w-full'>
+        <div className='max-w-7xl mx-auto px-4 pt-5 w-full'>
         <div className='flex justify-between items-center '>
             {/* logo & btn  */}
             <div className='flex items-center gap-2'>
