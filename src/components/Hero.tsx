@@ -54,22 +54,7 @@ const Hero = () => {
 
             {/* ================= Right Image ================= */}
             <div className="flex items-center justify-center px-5 pb-8 sm:px-8 sm:pb-10 md:px-6 md:py-10 lg:px-10">
-              <Image
-                src={heroImage}
-                alt="বাজারের পণ্যের ছবি"
-                width={420}
-                height={420}
-                priority
-                className="
-                  h-auto
-                  w-[200px]
-                  object-contain
-                  sm:w-[280px]
-                  md:w-[300px]
-                  lg:w-[360px]
-                  xl:w-[420px]
-                "
-              />
+              <Image src={heroImage} alt="বাজারের পণ্যের ছবি" width={420} height={420} priority className=" h-auto w-[200px] object-contain sm:w-[280px] md:w-[300px] lg:w-[360px] xl:w-[420px] " />
             </div>
 
           </div>

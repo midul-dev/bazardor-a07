@@ -9,7 +9,7 @@ const Header = () => {
   });
 
   return (
-    <header className="w-full pt-4 sm:pt-5 ">
+    <header className="w-full pt-4 sm:pt-5 sticky top-0 z-50 bg-white">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
 
         {/* ================= Top Header ================= */}
@@ -20,18 +20,7 @@ const Header = () => {
 
             {/* Logo */}
             <Link href="/" className="shrink-0">
-              <Image
-                src={logo}
-                alt="Bazardor"
-                width={50}
-                height={50}
-                priority
-                className="
-                  h-10 w-10 rounded-xl border border-green-500
-                  bg-green-700 p-2
-                  sm:h-12 sm:w-12
-                "
-              />
+              <Image src={logo} alt="Bazardor" width={50} height={50} priority className=" h-10 w-10 rounded-xl border border-green-500 bg-green-700 p-2 sm:h-12 sm:w-12 " />
             </Link>
 
             {/* Brand Info */}
@@ -56,33 +45,11 @@ const Header = () => {
           {/* ================= Auth Buttons ================= */}
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
 
-            <Link
-              href="/signin"
-              className="
-                rounded-lg px-2.5 py-2
-                text-xs font-semibold text-gray-700
-                transition-all
-                hover:bg-gray-100
-                sm:px-4 sm:text-sm
-              "
-            >
+            <Link href="/signin" className=" rounded-lg px-2.5 py-2 text-xs font-semibold text-gray-700 transition-all hover:bg-gray-100 sm:px-4 sm:text-sm " >
               সাইন ইন
             </Link>
 
-            <Link
-              href="/signup"
-              className="
-                rounded-lg bg-green-700
-                px-2.5 py-2
-                text-xs font-semibold text-white
-                shadow-sm
-                transition-all duration-200
-                hover:bg-green-800
-                hover:shadow-md
-                active:scale-95
-                sm:px-4 sm:py-2.5 sm:text-sm
-              "
-            >
+            <Link href="/signup" className=" rounded-lg bg-green-700 px-2.5 py-2 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:bg-green-800 hover:shadow-md active:scale-95 sm:px-4 sm:py-2.5 sm:text-sm " >
               সাইন আপ
             </Link>
 
