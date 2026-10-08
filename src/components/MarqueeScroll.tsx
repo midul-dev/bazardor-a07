@@ -1,16 +1,14 @@
+import getProducts from "@/lib/apiUrl/product";
+import formatNumber from "@/lib/functions/formatNumber";
 import { IProducts } from "@/types/productsType";
 import Marquee from "react-fast-marquee";
 
 const MarqueeScroll = async () => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products"
-  );
+  
 
-  const products: IProducts[] = await res.json();
+  const products: IProducts[] = await getProducts()
 
-  const formatNumber = (value: number) => {
-    return new Intl.NumberFormat("bn-BD").format(value);
-  };
+  
 
   const getUnit = (unit: string) => {
     const units: Record<string, string> = {
