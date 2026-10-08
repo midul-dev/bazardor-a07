@@ -4,11 +4,7 @@ import { IProducts } from "@/types/productsType";
 import Marquee from "react-fast-marquee";
 
 const MarqueeScroll = async () => {
-  
-
-  const products: IProducts[] = await getProducts()
-
-  
+  const products: IProducts[] = await getProducts();
 
   const getUnit = (unit: string) => {
     const units: Record<string, string> = {
@@ -22,14 +18,14 @@ const MarqueeScroll = async () => {
   };
 
   return (
-    <div className="w-full border-y border-green-100 bg-green-50/50">
+    <div className="w-full overflow-hidden border-y border-green-100 bg-green-50/50">
       <Marquee
-        speed={100}
+        speed={70}
         pauseOnHover
         gradient
         gradientColor="#f0fdf4"
-        gradientWidth={80}
-        className="py-2"
+        gradientWidth={60}
+        className="py-2.5 sm:py-3"
       >
         {products.map((product) => {
           const isUp = product.change.dir === "up";
@@ -38,42 +34,80 @@ const MarqueeScroll = async () => {
           return (
             <div
               key={product.id}
-              className="flex items-center gap-3 px-5 sm:px-7 "
+              className="
+                flex shrink-0 items-center gap-2
+                px-3
+                sm:gap-3 sm:px-5
+                md:px-6
+                lg:px-7
+              "
             >
               {/* Product */}
-              <div className="flex items-center gap-2 whitespace-nowrap">
-                <span className="flex items-center justify-center rounded-full bg-white shadow-sm">
+              <div className="flex shrink-0 items-center gap-1.5 whitespace-nowrap sm:gap-2">
+                <span
+                  className="
+                    flex h-6 w-6 shrink-0
+                    items-center justify-center
+                    rounded-full bg-white
+                    text-sm shadow-sm
+                    sm:h-7 sm:w-7 sm:text-base
+                  "
+                >
                   {product.image}
                 </span>
 
-                <span className="text-sm font-semibold text-gray-800">
+                <span
+                  className="
+                    text-xs font-semibold text-gray-800
+                    sm:text-sm
+                  "
+                >
                   {product.nameBn}
                 </span>
               </div>
 
               {/* Price */}
-              <div className="whitespace-nowrap text-sm text-gray-600">
-                <span className="font-medium text-gray-900">
+              <div
+                className="
+                  whitespace-nowrap
+                  text-xs text-gray-600
+                  sm:text-sm
+                "
+              >
+                <span className="font-semibold text-gray-900">
                   {formatNumber(product.today)}
                 </span>{" "}
                 টাকা/{getUnit(product.unit)}
               </div>
 
-              {/* Change */}
+              {/* Price Change */}
               <span
-                className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold whitespace-nowrap ${
-                  isUp
-                    ? "bg-red-50 text-red-600 ring-1 ring-red-100"
-                    : isDown
-                    ? "bg-green-50 text-green-600 ring-1 ring-green-100"
-                    : "bg-gray-100 text-gray-500 ring-1 ring-gray-200"
-                }`}
+                className={`
+                  inline-flex shrink-0 items-center gap-0.5
+                  whitespace-nowrap rounded-full
+                  px-2 py-0.5
+                  text-[10px] font-bold
+                  sm:gap-1 sm:px-2.5 sm:py-1 sm:text-xs
+
+                  ${
+                    isUp
+                      ? "bg-red-50 text-red-600 ring-1 ring-red-100"
+                      : isDown
+                      ? "bg-green-50 text-green-600 ring-1 ring-green-100"
+                      : "bg-gray-100 text-gray-500 ring-1 ring-gray-200"
+                  }
+                `}
               >
                 {isUp && "▲"}
                 {isDown && "▼"}
                 {!isUp && !isDown && "—"}
 
                 {formatNumber(Math.abs(product.change.pct))}%
+              </span>
+
+              {/* Separator */}
+              <span className="ml-1 text-green-200 sm:ml-2">
+                •
               </span>
             </div>
           );

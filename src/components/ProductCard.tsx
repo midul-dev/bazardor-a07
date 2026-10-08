@@ -1,19 +1,23 @@
 import formatNumber from "@/lib/functions/formatNumber";
 import { IProducts } from "@/types/productsType";
-import React from "react";
 
-const ProductCard = ({product} : {product:IProducts}) => {
+const ProductCard = ({ product }: { product: IProducts }) => {
   const isPriceUp = product.change.dir === "up";
   const isPriceFlat = product.change.dir === "flat";
-  const priceChangeIcon = isPriceUp ? "▲" : isPriceFlat ? "-" : "▼";
-  const priceChangeClass = isPriceUp
-    ? "bg-red-50 rounded-xl p-1 text-red-500 group-hover:bg-red-100"
+
+  const priceChangeIcon = isPriceUp
+    ? "▲"
     : isPriceFlat
-    ? "bg-base-200 rounded-xl p-1 text-black-500 group-hover:bg-black-100"
-    : "bg-green- rounded-xl p-1 text-green-500 group-hover:bg-green-100";
+    ? "—"
+    : "▼";
+
+  const priceChangeClass = isPriceUp
+    ? "bg-red-50 text-red-500 group-hover:bg-red-100"
+    : isPriceFlat
+    ? "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
+    : "bg-green-50 text-green-500 group-hover:bg-green-100";
 
   const getUnit = (unit: string) => {
-
     const units: Record<string, string> = {
       kg: "কেজি",
       litre: "লিটার",
@@ -27,19 +31,13 @@ const ProductCard = ({product} : {product:IProducts}) => {
   return (
     <div
       className="
-        group
-        
-        cursor-pointer
-        rounded-2xl
-        border
-        border-slate-100
+        group w-full cursor-pointer
+        rounded-xl border border-slate-100
         bg-white
-        p-4
+        p-3
         shadow-sm
 
-        transition-all
-        duration-300
-        ease-out
+        transition-all duration-300 ease-out
 
         hover:-translate-y-1.5
         hover:border-green-500
@@ -47,93 +45,131 @@ const ProductCard = ({product} : {product:IProducts}) => {
         hover:shadow-green-100
 
         active:scale-[0.98]
+
+        sm:rounded-2xl
+        sm:p-4
       "
     >
-      {/* Top Section */}
-      <div className="flex items-start gap-4">
+      {/* ================= Top Section ================= */}
+      <div className="flex items-start gap-3 sm:gap-4">
 
         {/* Product Emoji */}
         <div
           className="
             flex
-            h-12
-            w-12
+            h-10 w-10
             shrink-0
-            items-center
-            justify-center
-            rounded-xl
+            items-center justify-center
+            rounded-lg
             bg-green-50
-            text-3xl
+            text-2xl
 
-            transition-all
-            duration-300
-            ease-out
+            transition-all duration-300 ease-out
 
             group-hover:scale-110
             group-hover:rotate-3
             group-hover:bg-green-100
+
+            sm:h-12 sm:w-12
+            sm:rounded-xl
+            sm:text-3xl
           "
         >
           {product.image}
         </div>
 
         {/* Product Info */}
-        <div>
+        <div className="min-w-0">
           <h2
             className="
-              text-lg
+              truncate
+              text-base
               font-bold
               text-gray-900
 
-              transition-colors
-              duration-300
-
+              transition-colors duration-300
               group-hover:text-green-700
+
+              sm:text-lg
             "
           >
             {product.nameBn}
           </h2>
 
-          <p className="text-sm text-gray-500">
+          <p className="mt-0.5 text-xs text-gray-500 sm:text-sm">
             প্রতি {getUnit(product.unit)}
           </p>
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="mt-5 flex items-end justify-between">
+      {/* ================= Bottom Section ================= */}
+      <div
+        className="
+          mt-4
+          flex items-end justify-between
+          gap-2
 
+          sm:mt-5
+        "
+      >
         {/* Price */}
-        <div>
-          <p className="text-sm text-gray-500">
+        <div className="min-w-0">
+          <p className="text-xs text-gray-500 sm:text-sm">
             আজকের দাম
           </p>
 
           <p
             className="
-              mt-1
-              text-xl
+              mt-0.5
+              whitespace-nowrap
+              text-lg
               font-bold
               text-gray-900
 
-              transition-transform
-              duration-300
-
+              transition-transform duration-300
               group-hover:translate-x-0.5
+
+              sm:mt-1
+              sm:text-xl
             "
           >
-           {formatNumber(product.today)} 
-            <span className="text-base font-normal">
-             {' '} টাকা
+            {formatNumber(product.today)}
+
+            <span className="ml-1 text-sm font-normal sm:text-base">
+              টাকা
             </span>
           </p>
         </div>
 
         {/* Change Badge */}
         <div
-          className={priceChangeClass}
+          className={`
+            inline-flex
+            shrink-0
+            items-center
+            gap-0.5
+            whitespace-nowrap
+            rounded-full
+
+            px-2
+            py-1
+            text-[10px]
+            font-semibold
+
+            transition-all duration-300
+            group-hover:scale-105
+
+            sm:gap-1
+            sm:px-2.5
+            sm:py-1.5
+            sm:text-xs
+
+            ${priceChangeClass}
+          `}
         >
-          {priceChangeIcon} {formatNumber(Math.abs(product.change.pct)) } %
+          {priceChangeIcon}
+
+          {formatNumber(Math.abs(product.change.pct))}%
         </div>
       </div>
     </div>

@@ -1,23 +1,42 @@
-import getProducts from '@/lib/apiUrl/product';
-import { IProducts } from '@/types/productsType';
-import ProductCard from './ProductCard';
+import getProducts from "@/lib/apiUrl/product";
+import { IProducts } from "@/types/productsType";
+import ProductCard from "./ProductCard";
 
 const PriceDecrease = async () => {
-    const products: IProducts[] = await getProducts()
-    const topFallers = products.filter(product => product.change.dir === 'down').sort((a, b) => a.change.pct - b.change.pct)
+  const products: IProducts[] = await getProducts();
 
-    return (
-        <div className='px-6 pt-6'>
-            <h1 className='flex gap-2 items-center py-4'><span className='text-green-700'>▼</span><span className='text-2xl font-bold'>
-                আজ দাম কমেছে</span></h1>
-            <div className='grid grid-cols-3 gap-4'>
+  const topFallers = products
+    .filter((product) => product.change.dir === "down")
+    .sort((a, b) => a.change.pct - b.change.pct);
 
-                {
-                    topFallers.slice(0, 6).map(product => <ProductCard key={product.id} product={product} />)
-                }
-            </div>
+  return (
+    <section className="w-full px-4 pt-8 sm:px-6 sm:pt-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl">
+
+        {/* ================= Heading ================= */}
+        <div className="mb-4 flex items-center gap-2 sm:mb-5">
+          <span className="text-xl font-bold text-green-700 sm:text-2xl">
+            ▼
+          </span>
+
+          <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
+            আজ দাম কমেছে
+          </h2>
         </div>
-    );
+
+        {/* ================= Products ================= */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          {topFallers.slice(0, 6).map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
-export default PriceDecrease; 
+export default PriceDecrease;
