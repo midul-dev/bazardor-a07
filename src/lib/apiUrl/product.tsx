@@ -1,7 +1,7 @@
 import React from 'react';
 
 const getProducts = async () => {
-    const res = await fetch('https://api.abcz.workers.dev/api/bazardor/products')
+    const res = await fetch(process.env.PRODUCT_API)
 
     return res.json()
 };

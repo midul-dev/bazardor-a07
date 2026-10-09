@@ -4,7 +4,7 @@ import NavLinkClient from "./NavLinkClient";
 
 const NavLink = async () => {
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/categories"
+    process.env.CATEGORY_API
   );
 
   const categories: ICategory[] = await res.json();

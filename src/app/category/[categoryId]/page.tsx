@@ -11,13 +11,13 @@ const CategoryPage = async ({
   const { categoryId } = await params;
 
   const res = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`
+    `${process.env.SINGLE_CATEGORY_ID_API}${categoryId}`
   );
 
   const singleCategory: IProducts[] = await res.json();
 
   const response = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/categories/${categoryId}`
+    `${process.env.CATEGORY_ID_API}${categoryId}`
   );
 
   const category: ICategory = await response.json();
