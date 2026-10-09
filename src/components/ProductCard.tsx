@@ -1,4 +1,5 @@
 import formatNumber from "@/lib/functions/formatNumber";
+import getUnit from "@/lib/functions/formatUnit";
 import { IProducts } from "@/types/productsType";
 
 const ProductCard = ({ product }: { product: IProducts }) => {
@@ -17,16 +18,7 @@ const ProductCard = ({ product }: { product: IProducts }) => {
       ? "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
       : "bg-green-50 text-green-500 group-hover:bg-green-100";
 
-  const getUnit = (unit: string) => {
-    const units: Record<string, string> = {
-      kg: "কেজি",
-      litre: "লিটার",
-      piece: "পিস",
-      dozen: "ডজন",
-    };
-
-    return units[unit] || unit;
-  };
+  
 
   return (
     <div className=" group w-full cursor-pointer rounded-xl border border-slate-100 bg-white p-3 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-green-500 hover:shadow-xl hover:shadow-green-100 active:scale-[0.98] sm:rounded-2xl sm:p-4 " >
