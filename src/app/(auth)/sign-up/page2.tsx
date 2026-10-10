@@ -82,127 +82,8 @@ const SignUpPage = () => {
 
   return (
     <main className="min-h-[calc(100vh-130px)] bg-[#f0f5f0] px-4 py-10 text-slate-900 sm:py-12">
-      <div className="mx-auto w-full max-w-md">
-        {/* Heading */}
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            অ্যাকাউন্ট তৈরি করুন
-          </h1>
-
-          <p className="mt-2 text-sm leading-6 text-slate-600">
-            বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
-          </p>
-        </div>
-
-        {/* Signup Form */}
-        <div className="rounded-2xl border border-[#dfe8df] bg-white/80 p-5 shadow-sm sm:p-6">
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                নাম
-              </label>
-
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="যেমন: রহিম উদ্দিন"
-                autoComplete="name"
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                ইমেইল
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                autoComplete="email"
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                পাসওয়ার্ড
-              </label>
-
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="কমপক্ষে ৮ অক্ষর"
-                autoComplete="new-password"
-                minLength={8}
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                পাসওয়ার্ড নিশ্চিত করুন
-              </label>
-
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="আবার লিখুন"
-                autoComplete="new-password"
-                minLength={8}
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            {error && (
-              <p
-                role="alert"
-                className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600"
-              >
-                {error}
-              </p>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading || !!socialLoading}
-              className="w-full rounded-lg bg-green-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-800 hover:shadow-md active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "অ্যাকাউন্ট তৈরি হচ্ছে..." : "অ্যাকাউন্ট তৈরি করুন"}
-            </button>
-          </form>
-
-          {/* Divider */}
-          <div className="my-5 flex items-center gap-4">
-            <div className="h-px flex-1 bg-[#dfe8df]" />
-            <span className="text-sm text-slate-500">অথবা</span>
-            <div className="h-px flex-1 bg-[#dfe8df]" />
-          </div>
+<div>
+  <div>
 
           {/* Social Signup */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -236,27 +117,7 @@ const SignUpPage = () => {
             </button>
           </div>
 
-          {/* Sign In Link */}
-          <p className="mt-5 text-center text-sm text-slate-500">
-            অ্যাকাউন্ট আছে?{" "}
-            <Link
-              href="/signin"
-              className="font-medium text-green-700 underline-offset-4 hover:underline"
-            >
-              সাইন ইন করুন
-            </Link>
-          </p>
-        </div>
-
-        {/* Back Home */}
-        <div className="mt-6 text-center">
-          <Link
-            href="/"
-            className="text-sm text-slate-500 underline-offset-4 transition hover:text-green-700 hover:underline"
-          >
-            ← হোম পেজে ফিরে যান
-          </Link>
-        </div>
+         
       </div>
     </main>
   );

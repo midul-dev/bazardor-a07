@@ -3,6 +3,9 @@ import logo from "@/assets/logo-icon.png";
 import NavLink from "./NavLink";
 import Link from "next/link";
 
+import AuthUser from "./AuthUser";
+
+
 const Header = () => {
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
@@ -43,17 +46,7 @@ const Header = () => {
           </div>
 
           {/* ================= Auth Buttons ================= */}
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 md:gap-3">
-
-            <Link href="/signin" className=" rounded-lg px-2.5 py-2 text-xs font-semibold text-gray-700 transition-all hover:bg-gray-100 sm:px-4 sm:text-sm " >
-              সাইন ইন
-            </Link>
-
-            <Link href="/signup" className=" rounded-lg bg-green-700 px-2.5 py-2 text-xs font-semibold text-white shadow-sm transition-all duration-200 hover:bg-green-800 hover:shadow-md active:scale-95 sm:px-4 sm:py-2.5 sm:text-sm " >
-              সাইন আপ
-            </Link>
-
-          </div>
+          <AuthUser />
         </div>
 
         {/* ================= Category Navigation ================= */}

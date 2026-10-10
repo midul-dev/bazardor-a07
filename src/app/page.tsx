@@ -7,7 +7,7 @@ import PriceIncrease from '@/components/PriceIncrease';
 
 const HomePage = () => {
   return (
-    <div className='bg-base-200'>
+    <div >
       <Hero/>
       <PriceIncrease/>
       <PriceDecrease/>

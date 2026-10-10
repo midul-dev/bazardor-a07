@@ -3,6 +3,7 @@ import {Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import MarqueeScroll from "@/components/MarqueeScroll";
+import { Toaster } from "react-hot-toast";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header/>
         <MarqueeScroll/>
         <main className=" w-full max-w-7xl mx-auto">{children}</main>
+        <Toaster/>
       </body>
     </html>
   );

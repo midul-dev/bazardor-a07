@@ -82,68 +82,7 @@ const SignInPage = () => {
 
         {/* Sign In Card */}
         <div className="rounded-2xl border border-[#dfe8df] bg-white/80 p-5 shadow-sm sm:p-6">
-          <form onSubmit={onSubmit} className="space-y-4">
-            {/* Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                ইমেইল
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                autoComplete="email"
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            {/* Password */}
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-1.5 block text-sm font-medium text-slate-800"
-              >
-                পাসওয়ার্ড
-              </label>
-
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="আপনার পাসওয়ার্ড লিখুন"
-                autoComplete="current-password"
-                required
-                disabled={loading}
-                className="w-full rounded-lg border border-[#cfd6cf] bg-transparent px-3 py-2.5 text-sm outline-none transition placeholder:text-slate-400 focus:border-green-600 focus:ring-2 focus:ring-green-100 disabled:opacity-60"
-              />
-            </div>
-
-            {/* Error */}
-            {error && (
-              <p
-                role="alert"
-                className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600"
-              >
-                {error}
-              </p>
-            )}
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={loading || !!socialLoading}
-              className="w-full rounded-lg bg-green-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-green-800 hover:shadow-md active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "সাইন ইন হচ্ছে..." : "সাইন ইন"}
-            </button>
-          </form>
+          
 
           {/* Divider */}
           <div className="my-5 flex items-center gap-4">
