@@ -18,8 +18,8 @@ const MarqueeScroll = async () => {
   };
 
   return (
-    <div className="w-full overflow-hidden border-y border-green-100 bg-green-50/50">
-      <Marquee speed={120} pauseOnHover gradient gradientColor="#f0fdf4" gradientWidth={60} className="py-1.5" >
+    <div className="w-full overflow-hidden border-y border-green-100 bg-white">
+      <Marquee speed={120} pauseOnHover gradient gradientColor="#f0fdf4" gradientWidth={60} className="py-1.5 flex items-center" >
         {products.map((product) => {
           const isUp = product.change.dir === "up";
           const isDown = product.change.dir === "down";

@@ -2,44 +2,43 @@
 "use client";
 
 import { useState } from "react";
-import { authClient, signOut } from "@/lib/auth-client";
+import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
+
 const ProfilePage = () => {
-  const { data: session, isPending } = authClient.useSession();
-
-//   const [name, setName] = useState("");
-  const [isUpdating, setIsUpdating] = useState(false);
-//   const [isSigningOut, setIsSigningOut] = useState(false);
-
+  const { data: session, isPending } = useSession();
+  const [show, setShow] = useState(false)
   const user = session?.user;
+  const firstLetter = user?.name?.charAt(0)?.toUpperCase() ?? "U";
 
-  const firstLetter =
-    Array.from(user?.name?.trim() || "")[0]?.toUpperCase() || "U";
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const handleUpdateName = async (
     e: React.SubmitEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
-    // const updatedName = name.trim();
-    const formData = new FormData(e.currentTarget)
-    const user = Object.fromEntries(formData.entries())
-    
+    const formData = new FormData(e.currentTarget);
+    const formUser = Object.fromEntries(formData.entries()) as { name: string }
 
-    
 
-    if (user.name === user?.name) {
-      toast.error("নামে কোনো পরিবর্তন করা হয়নি!");
+    if (!formUser) {
+      toast.error("নাম খালি রাখা যাবে না!");
       return;
     }
 
+    if (formUser?.name === user?.name) {
+      toast.error("নামে কোনো পরিবর্তন করা হয়নি!");
+      return;
+    }
     setIsUpdating(true);
 
     try {
-      const { error } = await authClient.updateUser({
-        name: user?.name,
+      const { error } = await updateUser({
+        name: formUser.name,
       });
 
       if (error) {
@@ -48,7 +47,6 @@ const ProfilePage = () => {
       }
 
       toast.success("নাম সফলভাবে আপডেট হয়েছে!");
-    //   setName("");
     } catch (error) {
       console.error("Update name error:", error);
       toast.error("কিছু একটা সমস্যা হয়েছে!");
@@ -57,49 +55,24 @@ const ProfilePage = () => {
     }
   };
 
-  
-    const handleSignOut = async () => {
-        await signOut();
-        toast.success('সফলভাবে সাইন আউট হয়েছে।')
-       
+
+  const handleSignOut = async () => {
+    setIsSigningOut(true)
+    const { error } = await signOut();
+    toast.success('সফলভাবে সাইন আউট হয়েছে।')
+
+    if (error) {
+      toast.error(error?.message || "সাইন আউট করা যায়নি!");
+      setIsSigningOut(false);
+      return;
     }
 
-
-
-  if (isPending) {
-    return (
-      <main className="min-h-[calc(100dvh-80px)] bg-[#f0f5f0] px-4 py-8 sm:px-6">
-        <div className="mx-auto max-w-5xl animate-pulse space-y-6">
-          <div className="h-10 w-56 rounded-lg bg-gray-200" />
-          <div className="h-24 rounded-2xl bg-white" />
-          <div className="h-48 rounded-2xl bg-white" />
-        </div>
-      </main>
-    );
   }
 
-  if (!user) {
-    return (
-      <main className="flex min-h-[calc(100dvh-80px)] items-center justify-center bg-[#f0f5f0] px-4 py-10">
-        <div className="w-full max-w-md rounded-2xl border border-[#dfe8df] bg-white p-6 text-center shadow-sm">
-          <h1 className="text-xl font-bold text-gray-900">
-            আপনার অ্যাকাউন্টে সাইন ইন করুন
-          </h1>
-
-          <p className="mt-2 text-sm text-gray-600">
-            প্রোফাইল দেখতে হলে প্রথমে সাইন ইন করতে হবে।
-          </p>
-
-          <a
-            href="/sign-in"
-            className="btn mt-5 border-0 bg-green-700 text-white hover:bg-green-800"
-          >
-            সাইন ইন করুন
-          </a>
-        </div>
-      </main>
-    );
+  const handleEditButton = ()=>{
+    setShow(!show)
   }
+
 
   return (
     <main className="min-h-[calc(100dvh-80px)] bg-[#f0f5f0] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
@@ -118,10 +91,10 @@ const ProfilePage = () => {
         {/* User information card */}
         <section className="mb-6 flex flex-col gap-4 rounded-2xl border border-[#dfe8df] bg-white/80 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div className="flex min-w-0 items-center gap-4">
-            {user.image ? (
+            {user?.image ? (
               <Image
-                src={user.image}
-                alt={`${user.name}'s profile`}
+                src={user?.image}
+                alt={`${user?.name}'s profile`}
                 height={50}
                 width={50}
                 className="h-16 w-16 shrink-0 rounded-full object-cover"
@@ -134,11 +107,11 @@ const ProfilePage = () => {
 
             <div className="min-w-0">
               <h2 className="truncate text-lg font-semibold text-gray-950 sm:text-xl">
-                {user.name}
+                {user?.name}
               </h2>
 
               <p className="mt-1 break-all text-sm text-gray-500 sm:text-base">
-                {user.email}
+                {user?.email}
               </p>
             </div>
           </div>
@@ -150,13 +123,15 @@ const ProfilePage = () => {
             className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 self-start rounded-xl border border-red-300 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 sm:self-center"
           >
             <span aria-hidden="true">↪</span>
-            সাইন
-            {/* {isSigningOut ? "সাইন আউট হচ্ছে..." : "সাইন আউট"} */}
+
+            {isSigningOut ? "সাইন আউট হচ্ছে..." : "সাইন আউট"}
           </button>
         </section>
 
+        <div className="flex justify-center pb-5"><button onClick={handleEditButton} className="btn bg-green-600 rounded-xl text-white hover:bg-green-800">Edit Profile</button>
+</div>
         {/* Update profile form */}
-        <section className="rounded-2xl border border-[#dfe8df] bg-white/80 p-4 shadow-sm sm:p-6">
+       { show && <section className="rounded-2xl border border-[#dfe8df] bg-white/80 p-4 shadow-sm sm:p-6">
           <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">
             নাম হালনাগাদ করুন
           </h2>
@@ -174,7 +149,7 @@ const ProfilePage = () => {
                 id="name"
                 name="name"
                 type="text"
-                
+
                 required
                 maxLength={100}
                 disabled={isUpdating}
@@ -184,13 +159,13 @@ const ProfilePage = () => {
 
             <button
               type="submit"
-            //   disabled={isUpdating || !name.trim() || name.trim() === user.name}
+              //   disabled={isUpdating || !name.trim() || name.trim() === user.name}
               className="btn min-h-10 border-0 bg-green-700 px-4 text-sm font-semibold text-white shadow-sm hover:bg-green-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isUpdating ? "আপডেট হচ্ছে..." : "নাম হালনাগাদ করুন"}
             </button>
           </form>
-        </section>
+        </section>}
       </div>
     </main>
   );
