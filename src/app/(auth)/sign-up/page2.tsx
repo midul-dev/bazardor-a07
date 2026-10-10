@@ -82,7 +82,6 @@ const SignUpPage = () => {
 
   return (
     <main className="min-h-[calc(100vh-130px)] bg-[#f0f5f0] px-4 py-10 text-slate-900 sm:py-12">
-<div>
   <div>
 
           {/* Social Signup */}

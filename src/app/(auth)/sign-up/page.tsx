@@ -19,14 +19,7 @@ const SignUpPage = () => {
     try {
       const formData = new FormData(e.currentTarget);
 
-      const user = Object.fromEntries(
-        formData.entries()
-      ) as {
-        name: string;
-        email: string;
-        password: string;
-        confirmPassword: string;
-      };
+      const user = Object.fromEntries( formData.entries() ) as { name: string; email: string; password: string; confirmPassword: string; };
 
       if (user.password !== user.confirmPassword) {
         toast.error("পাসওয়ার্ড দুটি মিলছে না!");
@@ -225,24 +218,11 @@ GitHub
             </button>
 </div>
 
-          <p className="text-center text-sm leading-6 text-slate-600">
-            অ্যাকাউন্ট আছে?{" "}
-            <Link
-              href="/sign-in"
-              className="font-semibold text-green-700 underline-offset-4 hover:underline"
-            >
-              সাইন ইন করুন
-            </Link>
-          </p>
+          <p className="text-center text-sm leading-6 text-slate-600"> অ্যাকাউন্ট আছে?{" "} <Link href="/sign-in" className="font-semibold text-green-700 underline-offset-4 hover:underline" > সাইন ইন করুন </Link> </p>
         </div>
 
         <div className="mt-5 text-center sm:mt-6">
-          <Link
-            href="/"
-            className="inline-flex min-h-10 items-center justify-center rounded-lg px-3 text-sm text-slate-500 transition hover:text-green-700 hover:underline"
-          >
-            ← হোম পেজে ফিরে যান
-          </Link>
+          <Link href="/" className="inline-flex min-h-10 items-center justify-center rounded-lg px-3 text-sm text-slate-500 transition hover:text-green-700 hover:underline" > ← হোম পেজে ফিরে যান </Link>
         </div>
       </div>
     </main>
