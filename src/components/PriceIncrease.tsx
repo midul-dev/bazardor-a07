@@ -11,7 +11,7 @@ const PriceIncrease = async () => {
 
   return (
     <section className="w-full px-4 pt-8 sm:px-6 sm:pt-8">
-      <div className="mx-auto w-full max-w-7xl">
+      
 
         {/* Heading */}
         <div className="mb-4 flex items-center gap-2 sm:mb-5">
@@ -34,7 +34,7 @@ const PriceIncrease = async () => {
           ))}
         </div>
 
-      </div>
+      
     </section>
   );
 };

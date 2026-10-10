@@ -23,11 +23,11 @@ const CategoryPage = async ({
   const category: ICategory = await response.json();
 
   return (
-    <main className="w-full px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-      <div className="mx-auto w-full max-w-7xl">
+    <main className=" px-4 pt-4 sm:px-6 sm:pt-8">
+      
 
         {/* ================= Category Header ================= */}
-        <section className=" w-full rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:rounded-2xl sm:px-6 sm:py-5 md:px-7 md:py-6 " >
+        <section className=" w-full rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:rounded-2xl sm:px-6 sm:py-5 md:py-6 " >
           <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
 
             {/* Category Icon */}
@@ -73,7 +73,7 @@ const CategoryPage = async ({
 
         </section>
 
-      </div>
+      
     </main>
   );
 };

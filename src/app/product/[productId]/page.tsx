@@ -10,6 +10,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
   const res = await fetch(`${process.env.PRODUCT_DETAIL_API}${productId}`)
   const singleProduct: IProducts = await res.json()
   const marketPrices: { market: string; division: string; min: number; max: number }[] = singleProduct.markets
+const shortedMarketPrices= marketPrices.sort((a, b)=>a.min - b.min)
 
   const isPriceUp = singleProduct.change.dir === "up";
   const isPriceFlat = singleProduct.change.dir === "flat";
@@ -26,10 +27,13 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
       : "bg-green-50 text-green-500 group-hover:bg-green-100";
 
 
+
+
+
   return (
-    <main className="min-h-screen bg-[#f0f5f0] text-slate-900">
-      
-      <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+    <main className="min-h-screen  text-slate-900">
+
+      <div className="px-4 pb-12 pt-6 sm:px-6 sm:pt-8 ">
         {/* Breadcrumb */}
         {/* <nav
           aria-label="Breadcrumb"
@@ -64,13 +68,14 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
               </h1>
 
               <p className="mt-1 text-sm text-slate-500">
-                প্রতি {getUnit(singleProduct.unit)} · {singleProduct.category}
+
+                প্রতি {getUnit(singleProduct.unit)} · {singleProduct.categoryNameBn}
               </p>
 
               <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm">
                 গতকালের তুলনায় আজ দাম কমেছে{" "}
                 <span className="font-semibold text-green-600">
-                  {Math.abs(singleProduct.change.pct)} %
+                  {formatNumber(Math.abs(singleProduct.change.pct))} %
                 </span>
               </p>
             </div>
@@ -89,7 +94,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
             </div>
 
             <span className={priceChangeClass}>
-              {`${priceChangeIcon} ${formatNumber(Math.abs(singleProduct.change.pct))}}%`}  
+              {`${priceChangeIcon} ${formatNumber(Math.abs(singleProduct.change.pct))}}%`}
             </span>
           </div>
         </section>
@@ -128,7 +133,8 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
                   </thead>
 
                   <tbody>
-                    {marketPrices.map((market, index) => {
+                    {shortedMarketPrices.map((market, index) => {
+
                       const totalPrice = market.min + market.max
                       const avgPrice = totalPrice / 2
                       return (
@@ -146,11 +152,11 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
                           </td>
 
                           <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
-                            {(market.min)} টাকা
+                            {formatNumber(market.min)} টাকা
                           </td>
 
                           <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
-                            {(market.max)} টাকা
+                            {formatNumber(market.max)} টাকা
                           </td>
 
                           <td className="whitespace-nowrap px-4 py-3 text-right font-semibold sm:px-5">
@@ -169,7 +175,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
         {/* Related Category */}
         <section className="mt-7">
           <Link
-            href={`/category/${singleProduct.categoryNameBn}`}
+            href={`/category/${singleProduct.category}`}
             className="inline-flex items-center gap-2 rounded-lg py-2 text-sm font-semibold transition-colors hover:text-green-700"
           >
             {`${singleProduct.categoryIcon} সব ${singleProduct.categoryNameBn}`}

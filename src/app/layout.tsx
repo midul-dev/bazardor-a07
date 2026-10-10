@@ -22,10 +22,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme='light'
       className={`${notoSerifBengali.className} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="bg-[#f0f5f0] min-h-full flex flex-col">
         <Header/>
         <MarqueeScroll/>
-        <main className="w-full max-w-7xl mx-auto">{children}</main>
+        <main className=" w-full max-w-7xl mx-auto">{children}</main>
       </body>
     </html>
   );
