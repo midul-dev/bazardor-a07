@@ -1,15 +1,34 @@
+import PriceSummary from "@/components/PriceSummary";
+import formatNumber from "@/lib/functions/formatNumber";
 import getUnit from "@/lib/functions/formatUnit";
 import { IProducts } from "@/types/productsType";
 import Link from "next/link";
 
 
-const ProductDetailPage =async ({params}) => {
-    const {productId} = await params
-const res =await fetch(`${process.env.PRODUCT_DETAIL_API}${productId}`)
-const singleProduct :IProducts = await res.json()
+const ProductDetailPage = async ({ params }: { params: Promise<{ productId: string }> }) => {
+  const { productId } = await params
+  const res = await fetch(`${process.env.PRODUCT_DETAIL_API}${productId}`)
+  const singleProduct: IProducts = await res.json()
+  const marketPrices: { market: string; division: string; min: number; max: number }[] = singleProduct.markets
 
-    return (
-        <main className="min-h-screen bg-[#f0f5f0] text-slate-900">
+  const isPriceUp = singleProduct.change.dir === "up";
+  const isPriceFlat = singleProduct.change.dir === "flat";
+  const priceChangeIcon = isPriceUp
+    ? "▲"
+    : isPriceFlat
+      ? "—"
+      : "▼";
+
+  const priceChangeClass = isPriceUp
+    ? "bg-red-50 text-red-500 group-hover:bg-red-100"
+    : isPriceFlat
+      ? "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
+      : "bg-green-50 text-green-500 group-hover:bg-green-100";
+
+
+  return (
+    <main className="min-h-screen bg-[#f0f5f0] text-slate-900">
+      
       <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-6 sm:px-6 sm:pt-8 lg:px-8">
         {/* Breadcrumb */}
         {/* <nav
@@ -51,7 +70,7 @@ const singleProduct :IProducts = await res.json()
               <p className="mt-2 text-xs leading-5 text-slate-600 sm:text-sm">
                 গতকালের তুলনায় আজ দাম কমেছে{" "}
                 <span className="font-semibold text-green-600">
-                 {Math.abs(singleProduct.change.pct)} %
+                  {Math.abs(singleProduct.change.pct)} %
                 </span>
               </p>
             </div>
@@ -62,44 +81,22 @@ const singleProduct :IProducts = await res.json()
             <div>
               <p className="text-xs text-slate-500">আজকের দাম</p>
               <p className="mt-1 text-3xl font-bold">
-                {singleProduct.today}
+                {formatNumber(singleProduct.today)}
               </p>
               <p className="text-xs text-slate-500">
                 টাকা / {getUnit(singleProduct.unit)}
               </p>
             </div>
 
-            <span className="mt-1 text-sm font-semibold text-green-600">
-              ▼ {Math.abs(singleProduct.change)} %
+            <span className={priceChangeClass}>
+              {`${priceChangeIcon} ${formatNumber(Math.abs(singleProduct.change.pct))}}%`}  
             </span>
           </div>
         </section>
 
         {/* Price Summary */}
-        <section className="mt-5 rounded-2xl border border-[#dfe8df] bg-white/80 p-4 sm:p-5">
-          <h2 className="mb-4 text-lg font-bold sm:text-xl">
-            দামের সারসংক্ষেপ
-          </h2>
-
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {/* {priceSummary.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-[#dfe8df] p-4 transition-colors hover:bg-[#f8faf8] sm:p-5"
-              >
-                <p className="text-sm text-slate-500">{item.title}</p>
-
-                <p className={`mt-1 text-2xl font-bold ${item.color}`}>
-                  {formatPrice(item.price)}
-                  <span className="ml-1 text-sm font-medium">টাকা</span>
-                </p>
-
-                <p className="mt-1 text-xs text-slate-500">
-                  {item.description}
-                </p>
-              </div>
-            ))} */}
-          </div>
+        <section>
+          <PriceSummary marketPrices={marketPrices} singleProduct={singleProduct} />
 
           {/* Market Price Table */}
           <div className="mt-6">
@@ -131,34 +128,37 @@ const singleProduct :IProducts = await res.json()
                   </thead>
 
                   <tbody>
-                    {/* {marketPrices.map((market, index) => (
-                      <tr
-                        key={market.name}
-                        className={`border-t border-[#e4ebe4] transition-colors hover:bg-green-50 ${
-                          index % 2 === 1 ? "bg-[#f0f5f0]" : "bg-white"
-                        }`}
-                      >
-                        <td className="whitespace-nowrap px-4 py-3 font-medium sm:px-5">
-                          {market.name}
-                        </td>
+                    {marketPrices.map((market, index) => {
+                      const totalPrice = market.min + market.max
+                      const avgPrice = totalPrice / 2
+                      return (
+                        <tr
+                          key={market.market}
+                          className={`border-t border-[#e4ebe4] transition-colors hover:bg-green-50 ${index % 2 === 1 ? "bg-[#f0f5f0]" : "bg-white"
+                            }`}
+                        >
+                          <td className="whitespace-nowrap px-4 py-3 font-medium sm:px-5">
+                            {market.market}
+                          </td>
 
-                        <td className="whitespace-nowrap px-4 py-3 text-slate-500 sm:px-5">
-                          {market.division}
-                        </td>
+                          <td className="whitespace-nowrap px-4 py-3 text-slate-500 sm:px-5">
+                            {market.division}
+                          </td>
 
-                        <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
-                          {formatPrice(market.min)} টাকা
-                        </td>
+                          <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
+                            {(market.min)} টাকা
+                          </td>
 
-                        <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
-                          {formatPrice(market.max)} টাকা
-                        </td>
+                          <td className="whitespace-nowrap px-4 py-3 text-right sm:px-5">
+                            {(market.max)} টাকা
+                          </td>
 
-                        <td className="whitespace-nowrap px-4 py-3 text-right font-semibold sm:px-5">
-                          {market.avg} টাকা
-                        </td>
-                      </tr>
-                    ))} */}
+                          <td className="whitespace-nowrap px-4 py-3 text-right font-semibold sm:px-5">
+                            {formatNumber(avgPrice)} টাকা
+                          </td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -169,16 +169,16 @@ const singleProduct :IProducts = await res.json()
         {/* Related Category */}
         <section className="mt-7">
           <Link
-            href="/category/sobji"
+            href={`/category/${singleProduct.categoryNameBn}`}
             className="inline-flex items-center gap-2 rounded-lg py-2 text-sm font-semibold transition-colors hover:text-green-700"
           >
-            🥬 সব সবজি
+            {`${singleProduct.categoryIcon} সব ${singleProduct.categoryNameBn}`}
             <span aria-hidden="true">→</span>
           </Link>
         </section>
       </div>
     </main>
-    );
+  );
 };
 
 export default ProductDetailPage;

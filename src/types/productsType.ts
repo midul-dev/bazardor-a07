@@ -15,4 +15,5 @@ export interface IProducts {
         dir: string,
         pct: number
     }
+    markets:[]
 }

@@ -3,9 +3,13 @@ import Link from "next/link";
 import NavLinkClient from "./NavLinkClient";
 
 const NavLink = async () => {
-  const res = await fetch(
-    process.env.CATEGORY_API
-  );
+  const categoryApi = process.env.CATEGORY_API;
+
+  if (!categoryApi) {
+    throw new Error("CATEGORY_API is not defined");
+  }
+
+  const res = await fetch(categoryApi);
 
   const categories: ICategory[] = await res.json();
 

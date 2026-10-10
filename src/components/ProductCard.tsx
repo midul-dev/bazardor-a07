@@ -1,6 +1,7 @@
 import formatNumber from "@/lib/functions/formatNumber";
 import getUnit from "@/lib/functions/formatUnit";
 import { IProducts } from "@/types/productsType";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: IProducts }) => {
   const isPriceUp = product.change.dir === "up";
@@ -21,6 +22,7 @@ const ProductCard = ({ product }: { product: IProducts }) => {
   
 
   return (
+    <Link href={`/product/${product.id}`}>
     <div className=" group w-full cursor-pointer rounded-xl border border-slate-100 bg-white p-3 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-green-500 hover:shadow-xl hover:shadow-green-100 active:scale-[0.98] sm:rounded-2xl sm:p-4 " >
       {/* ================= Top Section ================= */}
       <div className="flex items-start gap-3 sm:gap-4">
@@ -73,6 +75,7 @@ const ProductCard = ({ product }: { product: IProducts }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
