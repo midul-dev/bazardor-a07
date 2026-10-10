@@ -13,12 +13,18 @@ const CategoryPage = async ({
   const res = await fetch(
     `${process.env.SINGLE_CATEGORY_ID_API}${categoryId}`
   );
+  if (!res.ok) {
+    throw new Error("Failed to fetch category products");
+  }
 
   const singleCategory: IProducts[] = await res.json();
 
   const response = await fetch(
     `${process.env.CATEGORY_ID_API}${categoryId}`
   );
+  if (!response.ok) {
+    throw new Error("Failed to fetch category details");
+  }
 
   const category: ICategory = await response.json();
 

@@ -8,7 +8,7 @@ import Image from "next/image";
 
 
 const ProfilePage = () => {
-  const { data: session, isPending } = useSession();
+  const { data: session } = useSession();
   const [show, setShow] = useState(false)
   const user = session?.user;
   const firstLetter = user?.name?.charAt(0)?.toUpperCase() ?? "U";

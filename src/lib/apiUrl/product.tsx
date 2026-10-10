@@ -1,8 +1,15 @@
-import React from 'react';
+
 
 const getProducts = async () => {
-    const res = await fetch(process.env.PRODUCT_API)
+    const productApi = process.env.PRODUCT_API;
+    if (!productApi) {
+        throw new Error("PRODUCT_API is not configured");
+    }
 
+    const res = await fetch(productApi)
+    if (!res.ok) {
+        throw new Error("Failed to fetch products");
+    }
     return res.json()
 };
 

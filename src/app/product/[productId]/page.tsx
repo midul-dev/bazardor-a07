@@ -8,6 +8,11 @@ import Link from "next/link";
 const ProductDetailPage = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const { productId } = await params
   const res = await fetch(`${process.env.PRODUCT_DETAIL_API}${productId}`)
+  
+  if (!res.ok) {
+    throw new Error("Failed to fetch product details");
+  }
+  
   const singleProduct: IProducts = await res.json()
   const marketPrices: { market: string; division: string; min: number; max: number }[] = singleProduct.markets
 const shortedMarketPrices= marketPrices.sort((a, b)=>a.min - b.min)

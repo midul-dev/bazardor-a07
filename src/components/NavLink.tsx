@@ -10,6 +10,9 @@ const NavLink = async () => {
   }
 
   const res = await fetch(categoryApi);
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
 
   const categories: ICategory[] = await res.json();
 
