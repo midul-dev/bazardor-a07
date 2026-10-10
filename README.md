@@ -58,4 +58,4 @@ Deploy the application on [Vercel](https://vercel.com/). Configure all required 
 
 **Note:** Product prices are indicative and may change depending on market conditions.
 
-Made with ❤️ in Bangladesh 🇧🇩
+Midul Mahmud
