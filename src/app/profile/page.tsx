@@ -5,9 +5,11 @@ import { useState } from "react";
 import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 const ProfilePage = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [show, setShow] = useState(false)
   const user = session?.user;
@@ -60,16 +62,19 @@ const ProfilePage = () => {
     setIsSigningOut(true)
     const { error } = await signOut();
     toast.success('সফলভাবে সাইন আউট হয়েছে।')
+    setIsSigningOut(false);
+    router.replace('/')
+    router.refresh()
 
     if (error) {
       toast.error(error?.message || "সাইন আউট করা যায়নি!");
-      setIsSigningOut(false);
+
       return;
     }
 
   }
 
-  const handleEditButton = ()=>{
+  const handleEditButton = () => {
     setShow(!show)
   }
 
@@ -129,9 +134,9 @@ const ProfilePage = () => {
         </section>
 
         <div className="flex justify-center pb-5"><button onClick={handleEditButton} className="btn bg-green-600 rounded-xl text-white hover:bg-green-800">Edit Profile</button>
-</div>
+        </div>
         {/* Update profile form */}
-       { show && <section className="rounded-2xl border border-[#dfe8df] bg-white/80 p-4 shadow-sm sm:p-6">
+        {show && <section className="rounded-2xl border border-[#dfe8df] bg-white/80 p-4 shadow-sm sm:p-6">
           <h2 className="text-xl font-bold text-gray-950 sm:text-2xl">
             নাম হালনাগাদ করুন
           </h2>

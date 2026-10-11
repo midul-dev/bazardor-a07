@@ -36,7 +36,8 @@ const SignInPage = () => {
 
       if (data) {
         toast.success(`Welcome back, ${user.email}!`);
-        router.push("/");
+        router.replace("/");
+        router.refresh();
       }
     } catch (err) {
       console.error("Unexpected login error:", err);
@@ -50,6 +51,8 @@ const SignInPage = () => {
     const data = await signIn.social({
     provider,
   })
+  toast.success(`Redirecting to ${provider} for authentication...`);
+  
 }
 
   return (

@@ -2,16 +2,20 @@
 import { signOut, useSession } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 
 const AuthUser = () => {
+  const router = useRouter()
   const { data: session } = useSession()
   const user = session?.user
 
   const handleSignOut = async () => {
     await signOut();
     toast.success('সফলভাবে সাইন আউট হয়েছে।')
+    router.replace('/')
+    router.refresh()
   }
   return (
     <div>
@@ -24,7 +28,7 @@ const AuthUser = () => {
             <div
               tabIndex={0}
               role="button"
-              className="flex items-center gap-2 rounded-full px-2 py-1.5 transition hover:bg-gray-100"
+              className="flex items-center gap-2 rounded-full px-2 py-1.5  cursor-pointer hover:bg-gray-100"
             >
               {user.image ? (
                 <Image
@@ -37,7 +41,7 @@ const AuthUser = () => {
                   {user.name.trim().slice(0, 1)}
                 </span>)}
 
-              <span className="hidden text-sm font-semibold text-gray-800 sm:block">
+              <span className="hidden text-sm font-semibold text-gray-800 sm:block ">
                 {user.name}
               </span>
 
