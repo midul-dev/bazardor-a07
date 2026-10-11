@@ -7,10 +7,7 @@ import AuthUser from "./AuthUser";
 
 
 const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
-
+  
   return (
     <header className="w-full pt-4 sm:pt-5 sticky top-0 z-50 bg-white">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
@@ -39,9 +36,9 @@ const Header = () => {
                 বাজার দর
               </Link>
 
-              <p className="truncate text-[10px] text-gray-500 sm:text-xs md:text-sm">
-                {date}
-              </p>
+              <div className="truncate text-[10px] text-gray-500 sm:text-xs md:text-sm">
+                <CurrentTime />
+              </div>
             </div>
           </div>
 

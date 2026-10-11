@@ -1,4 +1,4 @@
-import ProductCard from "@/components/ProductCard";
+import CategoryProduct from "@/components/CategoryProduct";
 import formatNumber from "@/lib/functions/formatNumber";
 import { ICategory } from "@/types/categoryType";
 import { IProducts } from "@/types/productsType";
@@ -59,23 +59,7 @@ const CategoryPage = async ({
         {/* ================= Products Section ================= */}
         <section className="pt-5 sm:pt-6">
 
-          {/* Section Heading */}
-          <div className="mb-4 sm:mb-5">
-            <h2 className=" text-sm font-medium text-slate-600 sm:text-base " >
-              মোট {formatNumber(singleCategory.length)}টি পণ্য
-              দেখানো হচ্ছে
-            </h2>
-          </div>
-
-          {/* Product Grid */}
-          <div className=" grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5 " >
-            {singleCategory.map((single) => (
-              <ProductCard
-                key={single.id}
-                product={single}
-              />
-            ))}
-          </div>
+         <CategoryProduct singleCategory={singleCategory} />
 
         </section>
 

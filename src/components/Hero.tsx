@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import heroImage from "@/assets/bazar-hero.png";
+import CurrentTime from "./CurrentTime";
+
 
 const Hero = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
-
+  
   return (
     <section className="w-full px-4 py-4 sm:px-6 sm:py-6">
       <div className="mx-auto w-full max-w-7xl">
@@ -18,9 +17,9 @@ const Hero = () => {
             <div className="px-5 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12 lg:px-14 lg:py-16">
 
               {/* Date */}
-              <p className="inline-flex max-w-full items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 sm:text-sm">
-                {date}
-              </p>
+              <div className="inline-flex max-w-full items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 sm:text-sm">
+                <CurrentTime />
+              </div>
 
               {/* Heading */}
               <h1 className="mt-4 max-w-2xl text-3xl font-bold leading-[1.2] tracking-tight text-gray-900 sm:mt-5 sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
