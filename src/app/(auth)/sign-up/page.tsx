@@ -3,13 +3,13 @@
 
 import { signIn, signUp } from "@/lib/auth-client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
-
+const router = useRouter()
   const onSubmit = async (
     e: React.SubmitEvent<HTMLFormElement>
   ) => {
@@ -43,7 +43,7 @@ const SignUpPage = () => {
 
       if (data) {
         toast.success("অ্যাকাউন্ট তৈরি সফল হয়েছে!");
-        redirect("/");
+        router.push("/");
       }
     } catch (err) {
       console.error("Unexpected signup error:", err);
