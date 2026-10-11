@@ -59,7 +59,7 @@ const CategoryPage = async ({
         {/* ================= Products Section ================= */}
         <section className="pt-5 sm:pt-6">
 
-         <CategoryProduct singleCategory={singleCategory} />
+         <CategoryProduct category={singleCategory} />
 
         </section>
 

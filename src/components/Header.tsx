@@ -4,6 +4,7 @@ import NavLink from "./NavLink";
 import Link from "next/link";
 
 import AuthUser from "./AuthUser";
+import CurrentTime from "./CurrentTime";
 
 
 const Header = () => {
