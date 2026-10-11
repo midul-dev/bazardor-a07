@@ -43,15 +43,7 @@ const ProductCard = ({ product }: { product: IProducts }) => {
       </div>
 
       {/* ================= Bottom Section ================= */}
-      <div
-        className="
-          mt-4
-          flex items-end justify-between
-          gap-2
-
-          sm:mt-5
-        "
-      >
+      <div className="mt-4 flex items-end justify-between gap-2 sm:mt-5" >
         {/* Price */}
         <div className="min-w-0">
           <p className="text-xs text-gray-500 sm:text-sm">

@@ -26,14 +26,7 @@ const Header = () => {
 
             {/* Brand Info */}
             <div className="min-w-0">
-              <Link
-                href="/"
-                className="
-                  block truncate text-xl font-bold text-gray-900
-                  transition-colors hover:text-green-700
-                  sm:text-2xl
-                "
-              >
+              <Link href="/" className=" block truncate text-xl font-bold text-gray-900 transition-colors hover:text-green-700 sm:text-2xl " >
                 বাজার দর
               </Link>
 
