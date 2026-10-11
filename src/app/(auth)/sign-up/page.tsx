@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<"google" | "github" | null>(null);
 const router = useRouter()
   const onSubmit = async (
     e: React.SubmitEvent<HTMLFormElement>
@@ -54,9 +55,18 @@ const router = useRouter()
   };
 
   const handleSocialLogin =async (provider : "google" | "github")=>{
-      const data = await signIn.social({
+      const { error } = await signIn.social({
       provider,
+      callbackURL: "/?login=success",
     })
+    setSocialLoading(provider);
+    toast.success(`Redirecting to ${provider} for authentication...`);
+
+    if (error) {
+      toast.error(`${provider} sign-up failed!`);
+      console.error("Social signup error:", error);
+    }
+
   }
 
   return (

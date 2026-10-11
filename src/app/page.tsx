@@ -1,5 +1,6 @@
 import AllProducts from '@/components/AllProducts';
 import Hero from '@/components/Hero';
+import LoginToast from '@/components/LoginToast';
 import PriceDecrease from '@/components/PriceDecrease';
 import PriceIncrease from '@/components/PriceIncrease';
 
@@ -8,6 +9,7 @@ import PriceIncrease from '@/components/PriceIncrease';
 const HomePage = () => {
   return (
     <div >
+      <LoginToast/>
       <Hero/>
       <PriceIncrease/>
       <PriceDecrease/>

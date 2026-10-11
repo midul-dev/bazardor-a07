@@ -51,13 +51,17 @@ const SignInPage = () => {
   const handleSocialLogin = async (
     provider: "google" | "github"
   ) => {
-    const data = await signIn.social({
+    const { error } = await signIn.social({
       provider,
+      callbackURL: "/?login=success",
     });
     setSocialLoading(provider);
-    toast.success(
-      `Redirecting to ${provider} for authentication...`
-    );
+    toast.success(`Redirecting to ${provider} for authentication...`);
+
+    if (error) {
+      toast.error(`${provider} sign-in failed!`);
+      console.error("Social login error:", error);
+    }
   };
 
   return (
