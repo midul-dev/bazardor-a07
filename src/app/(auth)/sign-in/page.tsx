@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 const SignInPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [socialLoading, setSocialLoading] = useState<"google" | "github" | null>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const SignInPage = () => {
     const data = await signIn.social({
       provider,
     });
-
+setSocialLoading(provider);
     toast.success(
       `Redirecting to ${provider} for authentication...`
     );
@@ -163,10 +164,9 @@ const SignInPage = () => {
                 <path fill="#FBBC05" d="M10.3 28.8a14.5 14.5 0 0 1 0-9.6l-7.4-5.7a23.5 23.5 0 0 0 0 21l7.4-5.7Z" />
                 <path fill="#34A853" d="M24 47.5c6.3 0 11.6-2.1 15.5-5.8l-7.3-5.7c-2 1.4-4.6 2.3-8.2 2.3-6.4 0-11.9-3.6-13.7-9l-7.4 5.7C6.8 42.2 14.8 47.5 24 47.5Z" />
               </svg>
-Google
-              {/* {socialLoading === "google"
+              {socialLoading === "google"
                 ? "অপেক্ষা করুন..."
-                : "Google দিয়ে চালিয়ে যান"} */}
+                : "Google"}
             </button>
           {/* GITHUB  */}
           <button
@@ -178,10 +178,9 @@ Google
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
                 <path d="M12 .9a11.1 11.1 0 0 0-3.5 21.6c.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.3-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.4.1-3 0 0 .9-.3 3.1 1.1a10.8 10.8 0 0 1 5.6 0C17 4.2 18 4.5 18 4.5c.6 1.6.2 2.7.1 3 .7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v3c0 .3.2.7.8.6A11.1 11.1 0 0 0 12 .9Z" />
               </svg>
-GitHub
-              {/* {socialLoading === "github"
+              {socialLoading === "github"
                 ? "অপেক্ষা করুন..."
-                : "GitHub দিয়ে চালিয়ে যান"} */}
+                : "GitHub"}
             </button>
 </div>
 
