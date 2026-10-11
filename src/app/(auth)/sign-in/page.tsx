@@ -54,7 +54,7 @@ const SignInPage = () => {
     const data = await signIn.social({
       provider,
     });
-setSocialLoading(provider);
+    setSocialLoading(provider);
     toast.success(
       `Redirecting to ${provider} for authentication...`
     );
@@ -151,11 +151,11 @@ setSocialLoading(provider);
 
           {/* Social Login */}
           <div className="flex gap-3 justify-center pb-4">
-          {/* google  */}
-    <button
+            {/* google  */}
+            <button
               type="button"
-              onClick={()=>handleSocialLogin("google")}
-            //   disabled={loading || !!socialLoading}
+              onClick={() => handleSocialLogin("google")}
+              //   disabled={loading || !!socialLoading}
               className="flex btn-xs items-center justify-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium transition hover:bg-slate-50 disabled:opacity-60"
             >
               <svg viewBox="0 0 48 48" className="h-5 w-5" aria-hidden="true">
@@ -168,11 +168,11 @@ setSocialLoading(provider);
                 ? "অপেক্ষা করুন..."
                 : "Google"}
             </button>
-          {/* GITHUB  */}
-          <button
+            {/* GITHUB  */}
+            <button
               type="button"
-               onClick={()=>handleSocialLogin("github")}
-            //   disabled={loading || !!socialLoading}
+              onClick={() => handleSocialLogin("github")}
+              //   disabled={loading || !!socialLoading}
               className="flex  items-center justify-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium transition hover:bg-slate-50 disabled:opacity-60"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
@@ -182,7 +182,7 @@ setSocialLoading(provider);
                 ? "অপেক্ষা করুন..."
                 : "GitHub"}
             </button>
-</div>
+          </div>
 
           {/* Sign Up Link */}
           <p className="text-center text-sm leading-6 text-slate-600">

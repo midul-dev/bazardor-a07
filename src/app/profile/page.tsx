@@ -63,8 +63,7 @@ const ProfilePage = () => {
     const { error } = await signOut();
     toast.success('সফলভাবে সাইন আউট হয়েছে।')
     setIsSigningOut(false);
-    router.replace('/')
-    router.refresh()
+    router.push('/')
 
     if (error) {
       toast.error(error?.message || "সাইন আউট করা যায়নি!");

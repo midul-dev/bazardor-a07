@@ -14,8 +14,8 @@ const AuthUser = () => {
   const handleSignOut = async () => {
     await signOut();
     toast.success('সফলভাবে সাইন আউট হয়েছে।')
-    router.replace('/')
-    router.refresh()
+    router.push('/')
+    
   }
   return (
     <div>
