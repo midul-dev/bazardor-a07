@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import PriceSummary from "@/components/PriceSummary";
 import formatNumber from "@/lib/functions/formatNumber";
 import getUnit from "@/lib/functions/formatUnit";
@@ -39,6 +40,7 @@ const shortedMarketPrices= marketPrices.sort((a, b)=>a.min - b.min)
     <main className="min-h-screen  text-slate-900">
 
       <div className="px-4 pb-12 pt-6 sm:px-6 sm:pt-8 ">
+        <Breadcrumbs singleProduct={singleProduct} />
         {/* Breadcrumb */}
         {/* <nav
           aria-label="Breadcrumb"
